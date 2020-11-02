@@ -1,0 +1,21 @@
+###################### Question 1 ######################
+Finding the initial guess using Bisection Method
+Initial range for Bisection Method [0, 3]: f(0) = 1.00000; f(3) = -0.09133;
+After three iterations of Bisection Method, Initial Guess = 0.37500
+Begin Newton-Raphson Method
+After step 1: approximate root = 0.57343
+After step 2: approximate root = 0.58844
+After step 3: approximate root = 0.58853
+After step 4: approximate root = 0.58853
+Tolerance Limit Reached
+Approximate order of convergence p = 1.99950
+Number of steps required = 4
+###################### Question 2 ######################
+Solving a non-linear system of equations
+First Guess = [1 2]
+After step #1, guess = [1.06622749 1.9453854 ]
+After step #2, guess = [1.08521342 1.94404757]
+After step #3, guess = [1.08609993 1.94368569]
+After step #4, guess = [1.08618665 1.9436852 ]
+Tolerance Limit Reached
+Approximate solution to the system of equation is [x,y] = [1.08618665 1.9436852 ]
