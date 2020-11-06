@@ -13,7 +13,7 @@ def get_interval(n):
     """
     Returns n intervals between the range [0,1]
     """
-    l = np.arange(n)/n
+    l = np.arange(n+1)/n
     interval_list = []
     for i in range(len(l)-1):
         interval_list.append([l[i], l[i+1]])
@@ -30,11 +30,12 @@ def rectangle_rule(interval_list):
 
 def trapezium_rule(interval_list):
     integral = 0
-    for interval in interval_list:
+    sum = 0
+    for i, interval in enumerate(interval_list):
         xi = interval[1]   #Xi
         xi_1 = interval[0] #Xi-1
         h = xi - xi_1
-        integral += (h/2.0) * (xi_1 + xi)
+        integral += (h/2.0) * (f(xi_1) + f(xi))
     return integral
 
 def simpson_rule(interval_list):
@@ -46,10 +47,9 @@ def simpson_rule(interval_list):
         integral += (h/6.0) * ( f(xi_1) + 4*f(xi-h/2.0) + f(xi) )
     return integral
 
-# df = pd.DataFrame(columns = ["N", "R_rule", "T_rule", "S_rule", "E_R", "E_T", "E_S"])
 i_actual = 0.7468241
 N = [50, 100, 200]
-# print("----------------------------------------------")
+
 print("N\tR_rule\tT_rule\tS_rule\tE_R\tE_T\tE_S")
 for i in range(len(N)):
     n = N[i]
@@ -60,5 +60,4 @@ for i in range(len(N)):
     e_r = np.abs(i_r - i_actual)
     e_s = np.abs(i_s - i_actual)
     e_t = np.abs(i_t - i_actual)
-    print(f"{n}\t{i_r:.4f}\t{i_t:.4f}\t{i_s:.4f}\t{e_r:.4f}\t{e_t:.4f}\t{e_s:.4f}")
-    # df
+    print(f"{n}\t{i_r:.5f}\t{i_t:.5f}\t{i_s:.5f}\t{e_r:.5f}\t{e_t:.5f}\t{e_s:.5f}")
