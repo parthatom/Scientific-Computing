@@ -50,7 +50,7 @@ def simpson_rule(interval_list):
 i_actual = 0.7468241
 N = [50, 100, 200]
 
-print("N\tR_rule\tT_rule\tS_rule\tE_R\tE_T\tE_S")
+print("N\tR_rule\t\tT_rule\t\tS_rule\t\tE_R\t\tE_T\t\tE_S")
 for i in range(len(N)):
     n = N[i]
     interval_list = get_interval(n)
@@ -60,4 +60,72 @@ for i in range(len(N)):
     e_r = np.abs(i_r - i_actual)
     e_s = np.abs(i_s - i_actual)
     e_t = np.abs(i_t - i_actual)
-    print(f"{n}\t{i_r:.5f}\t{i_t:.5f}\t{i_s:.5f}\t{e_r:.5f}\t{e_t:.5f}\t{e_s:.5f}")
+    print(f"{n:.1f}\t{i_r:.5f}\t\t{i_t:.5f}\t\t{i_s:.5f}\t\t{e_r:.5f}\t\t{e_t:.5f}\t\t{e_s:.5f}")
+
+print("######## QUESTION: 2 ########")
+
+def f2(x, y1, y2):
+    """
+    x0: Initial point
+    y1: y(x0)
+    y2: y'(x0)
+    """
+    return y2
+
+def g2(x,y1, y2):
+    """
+    x0: Initial point
+    y1: y(x0)
+    y2: y'(x0)
+    """
+    return np.cos(x*y1)
+
+
+def F(x, Y):
+    """
+    x: Initial point
+    Y: 2-dim Vector
+    Returns: The value of vector function at x and Y
+    """
+    return np.array([f2(x, Y[0], Y[1]), g2(x, Y[0], Y[1])])
+
+N = 64
+
+def runge_kutta(x0, y1, y2, xn):
+    """
+    x0: Initial point
+    y1: y(x0)
+    y2: y'(x0)
+    """
+    x_list = [x0]
+    Y = np.array([y1, y2])
+    Y_list = [Y]
+    h = (xn - x0)/N
+    # print(x0, Y)
+    for n in range(N):
+        xn = x_list[n]
+        Yn = Y_list[n]
+
+        K1 = h * F(xn, Yn)
+        K2 = h * F(xn +  h/2, Yn + (1/2)*K1)
+        K3 = h * F(xn + h/2, Yn + (1/2)*K2)
+        K4 = h * F(xn + h, Yn + K3)
+
+        x_new = xn + h
+        Y_new = Yn + (1/6) * (K1 + 2*K2 + 2*K3 + K4)
+        # print(x_new, Y_new)
+        x_list.append(x_new)
+        Y_list.append(Y_new)
+    Yn = Y_list[N-1]
+
+    return Yn[0],Yn[1]
+
+x_ns = [0.25, 0.5, 0.75, 1]
+x_0 = 0
+y1 = 1
+y2 = 0
+print(f"x_n\t||\ty( x_n )\t||\ty'(x_n)")
+
+for x_n in x_ns:
+    y_n, y_prime_n = runge_kutta(x_0, y1, y2, x_n)
+    print(f"{x_n}\t||\t{y_n:.6f}\t||\t{y_prime_n:.6f}")
