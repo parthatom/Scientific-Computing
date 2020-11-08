@@ -87,7 +87,7 @@ def F(x, Y):
     Y: 2-dim Vector
     Returns: The value of vector function at x and Y
     """
-    return np.array([f2(x, Y[0], Y[1]), g2(x, Y[0], Y[1])])
+    return np.array([f2(x, Y[0], Y[1]), g2(x, Y[0], Y[1])], dtype=np.float64)
 
 N = 64
 
@@ -100,30 +100,29 @@ def runge_kutta(x0, y1, y2, xn):
     x_list = [x0]
     Y = np.array([y1, y2])
     Y_list = [Y]
-    h = (xn - x0)/N
+    h = (float(xn - x0)/float(N))
     # print(x0, Y)
     for n in range(N):
         xn = x_list[n]
         Yn = Y_list[n]
 
         K1 = h * F(xn, Yn)
-        K2 = h * F(xn +  h/2, Yn + (1/2)*K1)
-        K3 = h * F(xn + h/2, Yn + (1/2)*K2)
+        K2 = h * F(xn +  h/2.0, Yn + (1.0/2)*K1)
+        K3 = h * F(xn + h/2.0, Yn + (1.0/2.0)*K2)
         K4 = h * F(xn + h, Yn + K3)
 
         x_new = xn + h
-        Y_new = Yn + (1/6) * (K1 + 2*K2 + 2*K3 + K4)
-        # print(x_new, Y_new)
+        Y_new = Yn + (1.0/6.0) * (K1 + 2.0*K2 + 2.0*K3 + K4)
         x_list.append(x_new)
         Y_list.append(Y_new)
-    Yn = Y_list[N-1]
+    Yn = Y_list[len(Y_list)-1]
 
     return Yn[0],Yn[1]
 
 x_ns = [0.25, 0.5, 0.75, 1]
-x_0 = 0
-y1 = 1
-y2 = 0
+x_0 = 0.0
+y1 = 1.0
+y2 = 0.0
 print(f"x_n\t||\ty( x_n )\t||\ty'(x_n)")
 
 for x_n in x_ns:
