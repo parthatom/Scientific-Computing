@@ -9,3 +9,7 @@ This repository contains python solutions to assignments given in the course MA3
 ## Assignment 2
 * Interpolating a function through Lagrange's interpolating polynomial and visualizing it.
 * Using Natural Cubic Splines to interpolate a function and it's vizualization.
+
+## Assignment 3
+* Numerical Integration via Rectangle, Trapezium and Simpson rule.
+* Fourth order Runge Kutta method to solve a second order differential equation
