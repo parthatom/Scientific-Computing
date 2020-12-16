@@ -13,3 +13,7 @@ This repository contains python solutions to assignments given in the course MA3
 ## Assignment 3
 * Numerical Integration via Rectangle, Trapezium and Simpson rule.
 * Fourth order Runge Kutta method to solve a second order differential equation
+
+##Assignment 4
+* Classical explicit scheme to solve one-dimensional heat equation and vizualization of the solution.
+* Crank-Nicolson method to solve one-dimensional heat equation and vizualization of the solution.
